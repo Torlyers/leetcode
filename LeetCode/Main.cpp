@@ -1,5 +1,7 @@
 #include<vector>
 #include<unordered_map>
+#include<string>
+#include<algorithm>
 
 using namespace std;
 
@@ -9,15 +11,15 @@ int main(void)
 	return 0;
 }
 
-//Easy--two sum
+//1--Easy--two sum
 vector<int> twoSum(vector<int>& nums, int target)
 {
 	vector<int> result;
 	unordered_map<int, int> map;
 	for (int i = 0; i < result.size(); i++)
 	{
-		int diff = target - i;
-		if (map.find(diff) != map.end())
+		int diff = target - nums[i];
+		if (map.count(diff))
 		{
 			result.push_back(map[diff] + 1);
 			result.push_back(i + 1);
@@ -40,7 +42,7 @@ int hammingDistance(int x, int y)
 	}
 }
 
-//Easy--reverse 32bit signed integer
+//7--Easy--reverse 32bit signed integer
 int reverse(int x)
 {
 	long long newnum = 0;
@@ -57,7 +59,7 @@ int reverse(int x)
 		return newnum;
 }
 
-//Medium--set Matrix zeroes
+//73--Medium--set matrix zeros
 void setZeroes(vector<vector<int>>& matrix)
 {
 	int m = matrix.size();
@@ -118,3 +120,93 @@ void setZeroes(vector<vector<int>>& matrix)
 	}
 	
 }
+
+//522--Medium--longest Uncommon subsequence
+int findLUSlength(vector<string>& strs)
+{
+	for (int i = 0; i < strs.size(); ++i)
+	{
+
+	}
+}
+
+//236--Medium--lowest common ancestor of a binary tree
+struct TreeNode
+{
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+	TreeNode(int x) : val(x), left(NULL), right(NULL) {}	
+};
+
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
+{
+	if (root == NULL || root == p || root == q)
+		return root;
+	TreeNode* LeftNode = lowestCommonAncestor(root->left, p, q);
+	TreeNode* RightNode = lowestCommonAncestor(root->right, p, q);
+
+	if (LeftNode && RightNode)
+		return root;
+	else
+		return LeftNode ? LeftNode : RightNode;
+}
+
+//390--medium--Elimination Game
+int lastRemaining(int n) 
+{
+	return LeftToRight(n);	
+}
+
+int LeftToRight(int n)
+{
+	if (n <= 2)
+		return n;
+	return 2 * RightToLeft(n / 2);
+}
+
+int RightToLeft(int n)
+{
+	if (n <= 2)
+		return 1;
+	if (n % 2 == 1)
+		return 2 * LeftToRight(n / 2);
+	return 2 * LeftToRight(n / 2) - 1;
+}
+
+//539--Medium--Minimum Time Difference
+int findMinDifference(vector<string>& timePoints)
+{
+	vector<int> timeminutes;
+	
+	for (int i = 0; i < timePoints.size(); ++i)
+	{
+		int hour = stoi(timePoints[i].substr(0, 2));
+		int min = stoi(timePoints[i].substr(3, 2));
+		int totalmin = hour * 60 + min - 720;
+		timeminutes.push_back(totalmin);
+	}
+
+	int minTime = INT_MAX;
+	sort(timeminutes.begin(), timeminutes.end());
+	for (int i = 0; i < timeminutes.size(); i++)
+	{
+		int a = abs(timeminutes[i] - timeminutes[(i - 1 + timeminutes.size()) % timeminutes.size()]);
+		int temp = min(a, 1440 - a);
+		minTime = min(temp, minTime);
+	}	
+	return minTime;
+}
+
+//532--Easy--K diff pairs in an array
+int findPairs(vector<int>& nums, int k) 
+{
+	int num = 0;
+	unordered_map<int, int> map;
+	for (int i = 0; i < nums.size(); ++i)
+	{
+		
+
+	}
+}
+
